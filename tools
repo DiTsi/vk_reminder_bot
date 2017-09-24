@@ -1,0 +1,3 @@
+celery
+celery flower - http://localhost:5555/tasks
+
