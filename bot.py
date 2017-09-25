@@ -118,7 +118,10 @@ def next_day(d, day, hours, minutes):
         try:
             return d.replace(day=day, hour=hours, minute=minutes, second=0)
         except ValueError:
-            return d.replace(month=(d.month + 1), day=day, hour=hours, minute=minutes, second=0)
+            try:
+                return d.replace(month=(d.month + 1), day=day, hour=hours, minute=minutes, second=0)
+            except ValueError:
+                return d.replace(month=(d.month + 2), day=day, hour=hours, minute=minutes, second=0)
 
 
 def return_list_of_uids_and_messages(messages_list):
@@ -199,10 +202,10 @@ def main():
                     # HANDLER FOR MESSAGE WITH +
                     print('message.date = ' + message.date)
                     time_delta = timedelta(hours=hours, minutes=minutes)
-                    send_time = strtime2objtime(message.date) + time_delta
+                    send_time = strtime2objtime(message.date) - timedelta(hours=server_gmt_shift) + time_delta
                     # print('сообщение будет отправлено: ' + objtime2strtime(send_time))
                     send_notification.delay([message.user_id], get_string('strings', 'task_added'))
-                    send_notification.apply_async(([message.user_id], mes), eta=make_eta(send_time, user_gmt_shift))
+                    send_notification.apply_async(([message.user_id], mes), eta=make_eta(send_time, 0))
                     continue
 
                 # HANDLER FOR OTHER MESSAGES
