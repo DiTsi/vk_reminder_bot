@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dad06b7c-71b2-4ef7-a79f-606225fea8fa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config_parser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/strings.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.py" afterPath="$PROJECT_DIR$/bot.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.py" afterPath="$PROJECT_DIR$/database.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parser.py" afterPath="$PROJECT_DIR$/parser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bot.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2954">
-              <caret line="220" column="0" lean-forward="false" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
+            <state relative-caret-position="192">
+              <caret line="145" column="96" lean-forward="false" selection-start-line="145" selection-start-column="96" selection-end-line="145" selection-end-column="96" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -29,86 +34,66 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tasks.log" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tasks.log">
+      <file leaf-file-name="amqp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/celery/app/amqp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="132">
+              <caret line="332" column="0" lean-forward="false" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tasks_queue.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tasks_queue.py">
+      <file leaf-file-name="configparser.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/lib64/python3.6/configparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-              <folding>
-                <element signature="e#19#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-6">
+              <caret line="782" column="34" lean-forward="true" selection-start-line="782" selection-start-column="34" selection-end-line="782" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1018">
-              <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="48">
+              <caret line="67" column="4" lean-forward="false" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.ini" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/strings.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="31" column="112" lean-forward="false" selection-start-line="31" selection-start-column="112" selection-end-line="31" selection-end-column="112" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config_parser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config_parser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
               <folding>
-                <element signature="e#1#16#0" expanded="true" />
+                <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extras.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/psycopg2/extras.py">
+      <file leaf-file-name="parser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-855">
-              <caret line="340" column="15" lean-forward="false" selection-start-line="340" selection-start-column="8" selection-end-line="340" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/codecs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/psycopg2/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_pydev_execfile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="550">
+              <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,8 +101,8 @@
       <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+            <state relative-caret-position="252">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -136,19 +121,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>timedelt</find>
-      <find>add_futu</find>
-      <find>mark</find>
-      <find>read</find>
-      <find>api</find>
-      <find>|</find>
-      <find>'\\$</find>
       <find>async</find>
       <find>\t</find>
       <find>alphanums</find>
       <find>: [0-6],</find>
       <find>\n</find>
-      <find>$</find>
       <find>asyn</find>
       <find>add_or_select_time</find>
       <find>incorrect_time</find>
@@ -165,7 +142,15 @@
       <find>add_time</find>
       <find>replace_time</find>
       <find>replace</find>
+      <find>dbname, tablename,</find>
       <find>fetchal</find>
+      <find>$</find>
+      <find>user_gmt_shift</find>
+      <find>get_user_gmt_shift</find>
+      <find>message.d</find>
+      <find>'</find>
+      <find>',</find>
+      <find>make_</find>
     </findStrings>
     <replaceStrings>
       <replace>': ,'</replace>
@@ -173,6 +158,9 @@
       <replace>|</replace>
       <replace />
       <replace>,</replace>
+      <replace>\\</replace>
+      <replace>\</replace>
+      <replace />
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -184,13 +172,15 @@
         <option value="$USER_HOME$/.dropbox_data/Dropbox/programming/PyCharm/vk_reminder_bot/tasks.py" />
         <option value="$PROJECT_DIR$/celeryconfig.py" />
         <option value="$PROJECT_DIR$/answer.py" />
-        <option value="$PROJECT_DIR$/tasks.py" />
         <option value="$PROJECT_DIR$/tasks_queue.py" />
         <option value="$PROJECT_DIR$/old_functions.py" />
-        <option value="$PROJECT_DIR$/parser.py" />
-        <option value="$PROJECT_DIR$/bot.py" />
         <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/config_parser.py" />
+        <option value="$PROJECT_DIR$/parser.py" />
+        <option value="$PROJECT_DIR$/tasks.py" />
         <option value="$PROJECT_DIR$/database.py" />
+        <option value="$PROJECT_DIR$/strings.ini" />
+        <option value="$PROJECT_DIR$/bot.py" />
       </list>
     </option>
   </component>
@@ -265,7 +255,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.database">
+  <component name="RunManager" selected="Python.bot">
     <configuration name="answer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -414,14 +404,15 @@
     <frame x="31" y="-1" width="1334" height="771" extended-state="6" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21085271" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.382263" sideWeight="0.4635659" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32721713" sideWeight="0.48449612" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32874617" sideWeight="0.49069768" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.382263" sideWeight="0.5069767" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32568806" sideWeight="0.49689922" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32721713" sideWeight="0.4472868" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32874617" sideWeight="0.49379843" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32874617" sideWeight="0.46899223" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24960998" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32721713" sideWeight="0.49689922" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.382263" sideWeight="0.5364341" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32721713" sideWeight="0.49379843" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.382263" sideWeight="0.49302325" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -429,7 +420,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32568806" sideWeight="0.49689922" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -440,9 +430,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/database.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="142" />
+          <url>file://$PROJECT_DIR$/test.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="144" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -452,27 +442,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="143" />
+      <option name="time" value="155" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/lib/python3.6/sched.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1484">
-          <caret line="108" column="47" lean-forward="false" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib64/python3.6/sched.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.dropbox_data/Dropbox/programming/PyCharm/vk_reminder_bot/tasks.py" />
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/vk/api.py" />
     <entry file="file://$PROJECT_DIR$/celeryconfig.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -645,40 +619,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/old_functions.py" />
-    <entry file="file://$PROJECT_DIR$/parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="62" column="51" lean-forward="false" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="1598" column="0" lean-forward="false" selection-start-line="1598" selection-start-column="0" selection-end-line="1598" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2954">
-          <caret line="220" column="0" lean-forward="false" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -698,37 +642,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/psycopg2/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tasks_queue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="116">
           <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
           <folding>
             <element signature="e#19#32#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -740,12 +660,98 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/psycopg2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1554">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/celery/app/amqp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="332" column="0" lean-forward="false" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="19" lean-forward="true" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib64/python3.6/configparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="782" column="34" lean-forward="true" selection-start-line="782" selection-start-column="34" selection-end-line="782" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1018">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="48">
+          <caret line="67" column="4" lean-forward="false" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strings.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="31" column="112" lean-forward="false" selection-start-line="31" selection-start-column="112" selection-end-line="31" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="145" column="96" lean-forward="false" selection-start-line="145" selection-start-column="96" selection-end-line="145" selection-end-column="96" />
           <folding>
-            <element signature="e#1#16#0" expanded="true" />
+            <element signature="e#25#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

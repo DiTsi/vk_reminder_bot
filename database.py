@@ -1,38 +1,74 @@
-
 import psycopg2
-from pprint import pprint
+# from pprint import pprint
 
-# dbname = <db_name>
+
+# DATABASE
+dbname = <db_name>
+tablename = 'users'
 dbuser = <db_user>
+first_col_name = 'user_id'
+second_col_name = 'gmt_shift'
 
 
-def db_show(dbname, tablename):
+
+def db_create():
+    try:
+        conn = psycopg2.connect("dbname='vk_reminder' user=<db_user> host='localhost'")
+    except Exception as err:
+        print("Connection error: {}".format(err))
+        exit(1)
+    else:
+        cur = conn.cursor()
+        cur.execute("CREATE TABLE " + tablename + " (id serial PRIMARY KEY, " + first_col_name + " integer, " + second_col_name + " integer);")
+        conn.commit()
+        cur.close()
+        conn.close()
+
+
+def db_show():
     conn = psycopg2.connect("dbname='" + dbname + "' user='" + dbuser + "' host='localhost'")
     cur = conn.cursor()
     cur.execute("SELECT * FROM " + tablename + ";")
     full_list = cur.fetchall()
+    print('[')
     for list_element in full_list:
         print(str(list_element))
+    print(']')
     cur.close()
     conn.close()
 
 
-def db_add(dbname, tablename, num, data):
-    conn = psycopg2.connect("dbname='" + dbname + "' user='" + dbuser + "' host='localhost'")
-    cur = conn.cursor()
-    cur.execute("INSERT INTO test (num, data) VALUES (%s, %s)", (num, data))
-    cur.execute("SELECT * FROM " + tablename + ";")
-    print(cur.fetchone())
-    conn.commit()
-    cur.close()
-    conn.close()
+def db_add(num, data):
+
+    search_result = db_search(str(num))
+
+    if not search_result:
+        try:
+            conn = psycopg2.connect("dbname='" + dbname + "' user='" + dbuser + "' host='localhost'")
+            cur = conn.cursor()
+            cur.execute("INSERT INTO " + tablename + " (" + first_col_name + ", " + second_col_name + ") VALUES (%s, %s)", (str(num), str(data)))
+            cur.execute("SELECT * FROM " + tablename + ";")
+            print(cur.fetchone())
+            conn.commit()
+            cur.close()
+            conn.close()
+        except Exception:
+            print('Can\'t add User in database')
+        else:
+            print('User was successfully added')
+    else:
+        try:
+            db_replace(num, search_result['data'], data)
+        except Exception:
+            print('Can\'t change GMT in database')
+        else:
+            print('User GMT was changed in database')
 
 
-def db_search(dbname, tablename, num):
+def db_search(num):
     conn = psycopg2.connect("dbname='" + dbname + "' user='" + dbuser + "' host='localhost'")
     cur = conn.cursor()
-    # cur.execute("INSERT INTO test (num, data) VALUES (%s, %s)", (num, data))
-    cur.execute("SELECT * FROM " + tablename + " WHERE num=" + str(num) +";")
+    cur.execute("SELECT * FROM " + tablename + " WHERE " + first_col_name + "=" + str(num) +";")
     list = cur.fetchall()
 
     cur.close()
@@ -50,37 +86,37 @@ def db_search(dbname, tablename, num):
         return {}
 
 
-def db_replace(dbname, tablename, number, oldvalue, newvalue):
+def db_replace(number, oldvalue, newvalue):
     conn = psycopg2.connect("dbname='" + str(dbname) + "' user='" + dbuser + "' host='localhost'")
     cur = conn.cursor()
-    cur.execute("UPDATE test SET data = '" + str(newvalue) + "' WHERE data = '" + str(oldvalue) + "';")
+    cur.execute("UPDATE " + tablename + " SET " + second_col_name + " = '" + str(newvalue) + "' WHERE " + second_col_name + " = '" + str(oldvalue) + "';")
     # cur.execute("SELECT * FROM " + 'test' + ";")
     conn.commit()
     cur.close()
     conn.close()
 
 
-def main():
-    # db_add('vk_reminder', 'test', 1923, 'kukuepta')
-    db_show('vk_reminder', "test")
+def db_delete(number):
+    conn = psycopg2.connect("dbname='" + str(dbname) + "' user='" + dbuser + "' host='localhost'")
+    cur = conn.cursor()
+    cur.execute("DELETE FROM " + tablename + ' WHERE ' + first_col_name + " = " + str(number) + ";")
+    # cur.execute("SELECT * FROM " + 'test' + ";")
+    conn.commit()
+    cur.close()
+    conn.close()
 
-    db_search('vk_reminder', "test", 1923)
-    db_show('vk_reminder', "test")
-    res = db_search('vk_reminder', "test", 1923)
-    # res["num"]
-    db_replace('vk_reminder', "test", res["num"], res["data"], "hello")
-    db_show('vk_reminder', "test")
+# def main():
+    # db_create()
+# db_show()
     #
-    # print(list[0])
-    # id, num, string0 = list[0]
-    # str0 = 'qwerty'
+    # db_search('vk_reminder', "test", 1923)
+    # db_show('vk_reminder', "test")
+    # res = db_search('vk_reminder', "test", 1923)
+    # db_replace('vk_reminder', "test", res["num"], res["data"], "hello")
+    # db_show('vk_reminder', "test")
 
 
+    # exit(0)
 
 
-    # b = db_show('vk_reminder', "test")
-
-    exit(0)
-
-
-main()
+# main()

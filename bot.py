@@ -9,9 +9,16 @@ from datetime import datetime, timedelta
 # from dateutil.relativedelta import relativedelta
 from parser import message_parser, parse_1
 import socket
+import configparser
+
+import database
+from config_parser import get_string
 from dateutil.relativedelta import relativedelta
 
+
+
 REMOTE_SERVER = "www.google.com"
+
 
 
 
@@ -126,12 +133,18 @@ def return_list_of_uids_and_messages(messages_list):
 
 
 def get_user_gmt_shift(user_id):
-    #!
-    return 3
+    return database.db_search(user_id)["data"]
+    # return gmt
 
 
 def replace_time(datetime, hours0, minutes0):
     return datetime.replace(hour=hours0, minute=minutes0)
+
+
+def make_eta(datetime, user_gmt):
+    #!
+    print('сообщение будет отправлено: ' + str(datetime - timedelta(hours=user_gmt)) + ' (GMT+00)')
+    return (datetime - timedelta(hours=user_gmt))
 
 
 def notification_time_in_future(message_datetime, notification_datetime):
@@ -150,45 +163,60 @@ def main():
     api = vk.API(vk.Session(access_token=token))
 
 
-    # while True:
-    datenow = datetime.utcnow()
-    list_of_unread_messages = get_unread_messages(api)
-    list_of_messages_objects = [Message(i) for i in list_of_unread_messages]
+    while True:
+        datenow = datetime.utcnow()
+        list_of_unread_messages = get_unread_messages(api)
+        list_of_messages_objects = [Message(i) for i in list_of_unread_messages]
 
-    for message in list_of_messages_objects:
+        for message in list_of_messages_objects:
 
-        # print(message.date)
-        print(message.message)
-        try:
-            [mes, shift, days, hours, minutes] = message_parser(message.message)
-        except ValueError:
-            # HANDLER FOR UNSUPPORTED MESSAGES
-            print('не могу обработать сообщение: ' + message.message)
-            print('\n')
+            ret = re.compile(r'^[Gg][+-](?P<timezone>[0-9]{1,2})$')
+            mat = ret.match(message.message)
+            if mat:
+                database.db_add(str(message.user_id), str(mat.group('timezone')))
+                send_notification.delay(message.user_id, get_string('strings', 'success_added_gmt'))
+                continue
 
-        else:
-            if shift == '+':
-                # HANDLER FOR MESSAGE WITH +
-                print('message.date = ' + message.date)
-                print('message.delay:')
-                # print('hours')
-                time_delta = timedelta(hours=hours, minutes=minutes)
-                print(objtime2strtime(strtime2objtime(message.date) + time_delta))
-                # send_notification.apply_async(([message.user_id, mes], eta=message.date+))
+            if not database.db_search(message.user_id):
+                send_notification.delay(message.user_id, get_string('strings', 'not_in_database'))
+                continue
+
+            user_gmt_shift = get_user_gmt_shift(message.user_id)
+
+            # print(message.date)
+            print(message.message)
+            try:
+                [mes, shift, days, hours, minutes] = message_parser(message.message)
+            except ValueError:
+                # HANDLER FOR UNSUPPORTED MESSAGES
+                send_notification.delay(message.user_id, get_string('strings', 'format_error') + '\n' + get_string('strings', 'examples'))
+                # print()
 
             else:
-                # HANDLER FOR OTHER MESSAGES
-                user_gmt_shift = get_user_gmt_shift(message.user_id)
-                message_datetime = strtime2objtime(message.date) + timedelta(hours=(user_gmt_shift - server_gmt_shift))
-                print('message_datetime = ' + objtime2strtime(message_datetime))
+                if mes == '':
+                    mes = get_string('strings', 'empty_message')
+                if shift == '+':
+                    # HANDLER FOR MESSAGE WITH +
+                    print('message.date = ' + message.date)
+                    time_delta = timedelta(hours=hours, minutes=minutes)
+                    send_time = strtime2objtime(message.date) + time_delta
+                    # print('сообщение будет отправлено: ' + objtime2strtime(send_time))
+                    send_notification.delay([message.user_id], get_string('strings', 'task_added'))
+                    send_notification.apply_async(([message.user_id], mes), eta=make_eta(send_time, user_gmt_shift))
+                    continue
 
-                # CODE TO CHANGE DAY
+                # HANDLER FOR OTHER MESSAGES
+                message_datetime = strtime2objtime(message.date) + timedelta(hours=(user_gmt_shift - server_gmt_shift))
+
                 if shift == '':
                     shift_day = '+0'
                 else:
-                    shift_day = shift_selector[shift]
+                    try:
+                        shift_day = shift_selector[shift]
+                    except KeyError:
+                        send_notification.delay(message.user_id, get_string('strings', 'format_error') + '\n' + get_string('strings', 'examples'))
+                        continue
 
-                notification_datetime = datetime
 
                 if isinstance(shift_day, int):
                     if not notification_time_in_future(message_datetime, next_weekday(message_datetime, shift_day).replace(hour=hours, minute=minutes, second=0)):
@@ -197,34 +225,43 @@ def main():
                     else:
                         notification_datetime = next_weekday(message_datetime, shift_day).replace(hour=hours, minute=minutes, second=0)
 
+                    send_notification.delay([message.user_id], get_string('strings', 'task_added'))
+                    send_notification.apply_async(([message.user_id], mes), eta=make_eta(notification_datetime, user_gmt_shift))
+
+
                 else:
                     try:
                         notification_datetime = message_datetime.replace(hour=hours, minute=minutes, second=0)
                     except ValueError:
-                        #!
-                        print('время таким не бывает!')
-                        # stop script
+                        # print(get_string('strings', 'incorrect_time_format'))
+                        send_notification.delay([message.user_id], get_string('strings', 'incorrect_time_format'))
+
+                        continue
                     else:
                         if shift_day == '+0':
                             if not notification_time_in_future(message_datetime, notification_datetime):
                                 shift_day = '+1'
-
                         if shift_day == '+1':
                             notification_datetime += timedelta(days=1)
                         elif shift_day == '+2':
                             notification_datetime += timedelta(days=2)
+
                         elif shift_day == 'd':
                             if not 1 <= days <= 31:
                                 #! неправильно задана дата
-                                print('число таким не бывает')
+                                # print(get_string('strings', 'incorrect_day'))
+                                send_notification.delay(([message.user_id], get_string('strings', 'incorrect_day')))
+                                continue
                             else:
                                 notification_datetime = next_day(notification_datetime, days, hours, minutes)
-                        else:
-                            # shift_day = int(shift_day)
-                            print('check code!')
-                            exit(1)
-                print('сообщение будет доставлено: ' + str(notification_datetime))
 
-            print('\n')
+                        # print('сообщение будет отправлено: ' + objtime2strtime(notification_datetime))
+                        send_notification.delay([message.user_id], get_string('strings', 'task_added'))
+                        send_notification.apply_async(([message.user_id], mes), eta=make_eta(notification_datetime, user_gmt_shift))
+
+        # print('database = ')
+        # database.db_show()
+        time.sleep(1)
+
 
 main()
