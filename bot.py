@@ -9,11 +9,11 @@ from datetime import datetime, timedelta
 # from dateutil.relativedelta import relativedelta
 from parser import message_parser, parse_1
 import socket
-import configparser
+# import configparser
 
 import database
 from config_parser import get_string
-from dateutil.relativedelta import relativedelta
+# from dateutil.relativedelta import relativedelta
 
 
 
@@ -38,7 +38,7 @@ shift_selector = {
     'вс': 6, 'вос': 6, 'воскр': 6, 'воскрес': 6, 'воскресенье': 6,
     'з': '+1', 'завтра': '+1', 'с': '+0', 'сегодня': '+0', 'пз': '+2', 'послезавтра': '+2',
     '+': '+',
-    'д': 'd', 'Д': 'd', 'ч': 'd', 'Ч': 'd'
+    'д': 'd', 'Д': 'd'
 }
 
 # selector_day = []
