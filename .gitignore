@@ -1,3 +1,3 @@
-.git_old/**
-__pychache__/**
-venv/**
+.git_old/
+__pychache__/
+venv/

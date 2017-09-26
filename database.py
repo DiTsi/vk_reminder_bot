@@ -4,16 +4,16 @@ import psycopg2
 
 # DATABASE
 dbname = <db_name>
-tablename = 'users'
+tablename = 'tzone'
 dbuser = <db_user>
 first_col_name = 'user_id'
-second_col_name = 'gmt_shift'
+second_col_name = 'tz'
 
 
 
 def db_create():
     try:
-        conn = psycopg2.connect("dbname='vk_reminder' user=<db_user> host='localhost'")
+        conn = psycopg2.connect("dbname=\"" + dbname + "\" user=\"" + dbuser + "\" host='localhost'")
     except Exception as err:
         print("Connection error: {}".format(err))
         exit(1)
@@ -26,14 +26,14 @@ def db_create():
 
 
 def db_show():
-    conn = psycopg2.connect("dbname='" + dbname + "' user='" + dbuser + "' host='localhost'")
+    conn = psycopg2.connect("dbname=\"" + dbname + "\" user=\"" + dbuser + "\" host=\"localhost\"")
     cur = conn.cursor()
     cur.execute("SELECT * FROM " + tablename + ";")
     full_list = cur.fetchall()
-    print('[')
+    print("[")
     for list_element in full_list:
         print(str(list_element))
-    print(']')
+    print("]")
     cur.close()
     conn.close()
 
@@ -44,7 +44,7 @@ def db_add(num, data):
 
     if not search_result:
         try:
-            conn = psycopg2.connect("dbname='" + dbname + "' user='" + dbuser + "' host='localhost'")
+            conn = psycopg2.connect("dbname=\"" + dbname + "\" user=\"" + dbuser + "\" host=\"localhost\"")
             cur = conn.cursor()
             cur.execute("INSERT INTO " + tablename + " (" + first_col_name + ", " + second_col_name + ") VALUES (%s, %s)", (str(num), str(data)))
             cur.execute("SELECT * FROM " + tablename + ";")
@@ -66,7 +66,7 @@ def db_add(num, data):
 
 
 def db_search(num):
-    conn = psycopg2.connect("dbname='" + dbname + "' user='" + dbuser + "' host='localhost'")
+    conn = psycopg2.connect("dbname=\"" + dbname + "\" user=\"" + dbuser + "\" host=\"localhost\"")
     cur = conn.cursor()
     cur.execute("SELECT * FROM " + tablename + " WHERE " + first_col_name + "=" + str(num) +";")
     list = cur.fetchall()
@@ -87,9 +87,9 @@ def db_search(num):
 
 
 def db_replace(number, oldvalue, newvalue):
-    conn = psycopg2.connect("dbname='" + str(dbname) + "' user='" + dbuser + "' host='localhost'")
+    conn = psycopg2.connect("dbname=\"" + str(dbname) + "\" user=\"" + dbuser + "\" host=\"localhost\"")
     cur = conn.cursor()
-    cur.execute("UPDATE " + tablename + " SET " + second_col_name + " = '" + str(newvalue) + "' WHERE " + second_col_name + " = '" + str(oldvalue) + "';")
+    cur.execute("UPDATE " + tablename + " SET " + second_col_name + " = \"" + str(newvalue) + "\" WHERE " + second_col_name + " = \"" + str(oldvalue) + "\";")
     # cur.execute("SELECT * FROM " + 'test' + ";")
     conn.commit()
     cur.close()
@@ -97,9 +97,9 @@ def db_replace(number, oldvalue, newvalue):
 
 
 def db_delete(number):
-    conn = psycopg2.connect("dbname='" + str(dbname) + "' user='" + dbuser + "' host='localhost'")
+    conn = psycopg2.connect("dbname=\"" + str(dbname) + "\" user=\"" + dbuser + "\" host=\"localhost\"")
     cur = conn.cursor()
-    cur.execute("DELETE FROM " + tablename + ' WHERE ' + first_col_name + " = " + str(number) + ";")
+    cur.execute("DELETE FROM " + tablename + " WHERE " + first_col_name + " = " + str(number) + ";")
     # cur.execute("SELECT * FROM " + 'test' + ";")
     conn.commit()
     cur.close()
