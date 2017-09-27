@@ -20,9 +20,4 @@ def send_notification(user_ids_list, mess):
         api.messages.send(user_ids=user_ids_list, message=mess)
         print(return_humanity_time() + ' message sent: ' + mess + ' ids=' + str(user_ids_list))
     except Exception as inst:
-        print(return_humanity_time())
-        print(inst.args)
-        print(inst)
-        print()
-
-    return 0
+        print("can\'t send notification")
