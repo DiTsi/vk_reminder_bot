@@ -78,11 +78,11 @@ def db_search(num):
 
     if len(list) > 1:
         print('More then one row with this ID')
-        id0, num0, str0 = list[0]
-        return {"id": id, "num": num0, "data": str0}
+        num0, str0 = list[0]
+        return {"num": num0, "data": str0}
     elif len(list) == 1:
-        id0, num0, str0 = list[0]
-        return {"id": id, "num": num0, "data": str0}
+        num0, str0 = list[0]
+        return {"num": num0, "data": str0}
         # return list
     else:
         return {}
