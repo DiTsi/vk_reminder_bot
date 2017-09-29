@@ -91,9 +91,9 @@ def db_search(num):
 def db_replace(number, oldvalue, newvalue):
     conn = psycopg2.connect(dbname=dbname, user=dbuser, host=host, password=password)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM " + tablename + " WHERE " + first_col_name + "=" + str(number) +";")
-    print('fetchall = ' + str(cur.fetchall()))
-    cur.execute("UPDATE " + tablename + " SET " + second_col_name + " = '" + str(newvalue) + "' WHERE " + second_col_name + " = '" + str(oldvalue) + "';")
+    # cur.execute("SELECT * FROM " + tablename + " WHERE " + first_col_name + " = " + str(number) + ";")
+    # print('fetchall = ' + str(cur.fetchall()))
+    cur.execute("UPDATE " + tablename + " SET " + second_col_name + " = '" + str(newvalue) + "' WHERE " + first_col_name + " = '" + str(number) + "';")
     # cur.execute("SELECT * FROM " + 'test' + ";")
     conn.commit()
     cur.close()

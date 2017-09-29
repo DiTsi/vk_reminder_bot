@@ -178,11 +178,12 @@ def main():
 
         for message in list_of_messages_objects:
 
-            ret = re.compile(r'^[Gg][+-](?P<timezone>[0-9]{1,2})$')
+            ret = re.compile(r'^([\'\"])?[Gg][+-](?P<timezone>[0-9]{1,2})([\'\"])?$')
             mat = ret.match(message.message)
             if mat:
                 database.db_add(str(message.user_id), str(mat.group('timezone')))
-                send_notification.delay(message.user_id, get_string('strings', 'success_added_gmt'))
+                send_notification.delay(message.user_id, get_string('strings', 'success_added_gmt') + '\n' + '' + 
+                        '*** Ниже представлены допустимые выражения:' + '\n' + get_string('strings', 'examples'))
                 continue
 
             if not database.db_search(message.user_id):
