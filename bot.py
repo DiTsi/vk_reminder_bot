@@ -27,8 +27,6 @@ REMOTE_SERVER = "www.google.com"
 token = <token>
 count = 10  # How many messages must be readed (max - 200)
 server_gmt_shift = 3
-
-
 shift_selector = {
     'пн': 0, 'пон': 0, 'понед': 0, 'понедельник': 0,
     'вт': 1, 'вторн': 1, 'вторник': 1,
@@ -41,6 +39,7 @@ shift_selector = {
     '+': '+',
     'д': 'd', 'Д': 'd'
 }
+debug = 0
 
 # selector_day = []
 
@@ -144,7 +143,8 @@ def return_list_of_uids_and_messages(messages_list):
 
 
 def get_user_gmt_shift(user_id):
-    return database.db_search(user_id)["data"]
+    # return database.db_search(user_id)["data"]
+    return 3
 
 
 def replace_time(datetime, hours0, minutes0):
@@ -173,21 +173,76 @@ def main():
 
     while True:
         # datenow = datetime.utcnow()
-        list_of_unread_messages = get_unread_messages(api)
-        list_of_messages_objects = [Message(i) for i in list_of_unread_messages]
+
+
+        list_of_messages_objects = list()
+        if not debug:
+
+            list_of_unread_messages = get_unread_messages(api)
+            list_of_messages_objects = [Message(i) for i in list_of_unread_messages]
+
+        else:
+
+            new_l = list()
+
+            list_of_debug_messages = get_string('strings', 'examples').split('\n')
+            # rere = re.compile("^((?P<message>[а-яА-Я\d ]+)\s(?P<comment>\[[а-яА-Я\d ]+\]))?$")
+            pattern = r'\[.*\]'
+            for m in list_of_debug_messages:
+                result = re.sub(pattern, '', m)
+                if result != '':
+                    new_l.append(result)
+
+
+            new_k = list()
+            for i in new_l:
+                dict = {}
+                dict['body'] = i
+                dict['mid'] = 1
+                dict['date'] = int(time.time())
+                dict['uid'] = 204200973
+
+                new_k.append(dict)
+
+
+            list_of_messages_objects = [Message(i) for i in new_k]
+
+            # self.message = message['body']
+            # self.message_id = message['mid']
+            # self.date = datetime.fromtimestamp(message['date']).strftime(timeformat)
+            # self.user_id = message['uid']
+
+            # list_of_messages_objects = [Message(i) for i in new_l]
+            # for i in list_of_messages_objects:
+            #     i.date = objtime2strtime(datetime.utcnow() + timedelta(hours=3))
+            #     i.user_id = 204200973
+            #     i.message_id = 1
+
+            # for m in new_l:
+            #     mes = Message()
+            #     mes.date = objtime2strtime(datetime.utcnow() + timedelta(hours=3))
+            #     mes.user_id = 204200973
+            #     mes.message_id = 1
+            #     mes.message = m
+
+                # list_of_messages_objects.append(mes)
 
         for message in list_of_messages_objects:
+            # if debug:
+            #     print(message)
 
             ret = re.compile(r'^([\'\"])?[Gg][+-](?P<timezone>[0-9]{1,2})([\'\"])?$')
             mat = ret.match(message.message)
             if mat:
                 database.db_add(str(message.user_id), str(mat.group('timezone')))
-                send_notification.delay(message.user_id, get_string('strings', 'success_added_gmt') + '\n' + '' + 
+                if not debug:
+                    send_notification.delay(message.user_id, get_string('strings', 'success_added_gmt') + '\n' + '' +
                         '*** Ниже представлены допустимые выражения:' + '\n' + get_string('strings', 'examples'))
                 continue
 
-            if not database.db_search(message.user_id):
-                send_notification.delay(message.user_id, get_string('strings', 'not_in_database'))
+            if not 1:
+                if not debug:
+                    send_notification.delay(message.user_id, get_string('strings', 'not_in_database'))
                 continue
 
             user_tz = get_user_gmt_shift(message.user_id)
@@ -198,7 +253,11 @@ def main():
                 [mes, shift, days, hours, minutes] = message_parser(message.message)
             except ValueError:
                 # HANDLER FOR UNSUPPORTED MESSAGES
-                send_notification.delay(message.user_id, get_string('strings', 'format_error') + '\n' + get_string('strings', 'examples'))
+
+                if not debug:
+                    send_notification.delay(message.user_id, get_string('strings', 'format_error') + '\n' + get_string('strings', 'examples'))
+                else:
+                    mydebug(message, datetime.utcnow(), user_tz)
                 # print()
 
             else:
@@ -208,8 +267,9 @@ def main():
                     # HANDLER FOR MESSAGE WITH +
                     time_delta = timedelta(hours=hours, minutes=minutes)
                     send_time = strtime2objtime(message.date) - timedelta(hours=server_gmt_shift) + time_delta
-                    send_notification.delay([message.user_id], get_string('strings', 'task_added') + ' ' + objtime2strtime(make_eta(send_time, -user_tz)))
-                    send_notification.apply_async(([message.user_id], mes), eta=make_eta(send_time, 0))
+                    if not debug:
+                        send_notification.delay([message.user_id], get_string('strings', 'task_added') + ' ' + objtime2strtime(make_eta(send_time, -user_tz)))
+                        send_notification.apply_async(([message.user_id], mes), eta=make_eta(send_time, 0))
                     mydebug(message, send_time, user_tz)
                     continue
 
@@ -222,7 +282,11 @@ def main():
                     try:
                         shift_day = shift_selector[shift]
                     except KeyError:
-                        send_notification.delay(message.user_id, get_string('strings', 'format_error') + '\n' + get_string('strings', 'examples'))
+
+                        if not debug:
+                            send_notification.delay(message.user_id, get_string('strings', 'format_error') + '\n' + get_string('strings', 'examples'))
+                        else:
+                            mydebug(message, datetime.utcnow(), user_tz)
                         continue
 
 
@@ -234,8 +298,9 @@ def main():
                         notification_datetime = next_weekday(message_datetime, shift_day).replace(hour=hours, minute=minutes, second=0)
 
                     eta = make_eta(notification_datetime, user_tz)
-                    send_notification.delay([message.user_id], get_string('strings', 'task_added') + ' ' + objtime2strtime(eta + timedelta(hours=user_tz)))
-                    send_notification.apply_async(([message.user_id], mes), eta=eta)
+                    if not debug:
+                        send_notification.delay([message.user_id], get_string('strings', 'task_added') + ' ' + objtime2strtime(eta + timedelta(hours=user_tz)))
+                        send_notification.apply_async(([message.user_id], mes), eta=eta)
                     mydebug(message, eta, user_tz)
 
 
@@ -243,7 +308,8 @@ def main():
                     try:
                         notification_datetime = message_datetime.replace(hour=hours, minute=minutes, second=0)
                     except ValueError:
-                        send_notification.delay([message.user_id], get_string('strings', 'incorrect_time_format'))
+                        if not debug:
+                            send_notification.delay([message.user_id], get_string('strings', 'incorrect_time_format'))
 
                         continue
                     else:
@@ -257,17 +323,20 @@ def main():
 
                         elif shift_day == 'd':
                             if not 1 <= days <= 31:
-                                send_notification.delay(([message.user_id], get_string('strings', 'incorrect_day')))
+                                if not debug:
+                                    send_notification.delay(([message.user_id], get_string('strings', 'incorrect_day')))
                                 continue
                             else:
                                 notification_datetime = next_day(notification_datetime, days, hours, minutes)
-                        send_notification.delay([message.user_id],get_string('strings', 'task_added') + ' ' + objtime2strtime(make_eta(notification_datetime, 0)))
-                        send_notification.apply_async(([message.user_id], mes), eta=make_eta(notification_datetime, user_tz))
+                        if not debug:
+                            send_notification.delay([message.user_id],get_string('strings', 'task_added') + ' ' + objtime2strtime(make_eta(notification_datetime, 0)))
+                            send_notification.apply_async(([message.user_id], mes), eta=make_eta(notification_datetime, user_tz))
                         mydebug(message, notification_datetime - timedelta(hours=user_tz), user_tz)
 
-        # print('database = ')
-        # database.db_show()
         time.sleep(1)
+
+        if debug:
+            break
 
 
 main()

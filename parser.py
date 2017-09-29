@@ -51,11 +51,12 @@ def message_parser(text):
     spaces = pp.White('\t \n\r')
     hours = pp.Word(pp.nums)('hours')
     minutes = pp.Word(pp.nums)('minutes')
-    pretime = (pp.Optional(pp.Word(pp.nums))('days') + pp.oneOf(list(shift_selector.keys()))('shift'))('pretime')
+    l0 = list(shift_selector.keys())
+    pretime = (pp.Optional(pp.Word(pp.nums))('days') + pp.oneOf(l0)('shift'))('pretime')
     # time0 = (hours + pp.oneOf(list(':.чЧдД')) + minutes + pp.Optional(pp.oneOf(list('мМ'))) |
     #          hours + pp.Optional(pp.oneOf(list(':.чЧдД'))) |
     #          minutes + pp.Optional(pp.oneOf(list('мМ'))))('time')
-    time0 = (hours + pp.oneOf(list(':.чЧдД')) + minutes + pp.Optional(pp.oneOf(list('мМ')))|minutes + pp.oneOf(list('мМ'))|hours)('time')
+    time0 = ((hours + pp.oneOf(list(':.чЧ')) + minutes + pp.Optional(pp.oneOf(list('мМ'))))|minutes + pp.oneOf(list('мМ'))|(hours+pp.Optional(pp.oneOf(list(':.чЧ')))))('time')
     time_parser = pp.LineStart() + pp.Optional(pretime) + time0 + pp.Optional(spaces) + pp.LineEnd()
 
     try:
@@ -84,7 +85,7 @@ def message_parser(text):
 
 
 # def main():
-#     result = message_parser('+3:25')
+#     result = message_parser('ваше сообщение с14:15    ')
 #     exit(0)
 #
 # main()
