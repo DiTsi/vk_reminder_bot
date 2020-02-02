@@ -200,7 +200,7 @@ def main():
                 dict['body'] = i
                 dict['mid'] = 1
                 dict['date'] = int(time.time())
-                dict['uid'] = 204200973
+                dict['uid'] = <uid>
 
                 new_k.append(dict)
 
@@ -215,13 +215,13 @@ def main():
             # list_of_messages_objects = [Message(i) for i in new_l]
             # for i in list_of_messages_objects:
             #     i.date = objtime2strtime(datetime.utcnow() + timedelta(hours=3))
-            #     i.user_id = 204200973
+            #     i.user_id = <uid>
             #     i.message_id = 1
 
             # for m in new_l:
             #     mes = Message()
             #     mes.date = objtime2strtime(datetime.utcnow() + timedelta(hours=3))
-            #     mes.user_id = 204200973
+            #     mes.user_id = <uid>
             #     mes.message_id = 1
             #     mes.message = m
 
